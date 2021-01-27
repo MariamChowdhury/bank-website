@@ -10,7 +10,7 @@
 <body>
   <div id="form">
     <h1 class="text-center">Welcome To Pioneer Bank</h1>
-    <div id="submit-area">
+    <div class="submit-area">
       <h4>Login</h4>
      <input type="text" class="form-control" placeholder="Email">
       <br>
@@ -24,7 +24,7 @@
      <div class="col-md-4 ">
        <div class="deposit status">
         <h5>Deposit</h5>
-        <h2>$00</h2>
+        <h2>$ <span id="depositMoney">00</span></h2>
        </div>
      </div>
      <div class="col-md-4 ">
@@ -36,12 +36,31 @@
      <div class="col-md-4 ">
        <div class="balance status">
         <h5>Balance</h5>
-        <h2>$1500</h2>
+        <h2>$ <span id="balanceMoney">1500</span></h2>
+       </div>
+     </div>
+   </div>
+   <div class="row">
+     <div class="col-md-6">
+       <div class="submit-area">
+        <h4>Deposit</h4>
+        <input type="text" id="depositAmount" class="form-control" placeholder="$ amount you want to deposit">
+        <br>
+        <button id="depositBtn" class="btn btn-success">Deposit</button>
+       </div>
+     </div>
+     <div class="col-md-6">
+       <div class="submit-area">
+        <h4>Withdraw</h4>
+        <input type="text" class="form-control" placeholder="$ amount you want to withdraw">
+        <br>
+        <button class="btn btn-success">Withdraw</button>
        </div>
      </div>
    </div>
   </div>
   <script>
+    //for login page
     const loginBtn=document.getElementById('login');
 loginBtn.addEventListener('click',function(){
   const loginArea=document.getElementById('form');
@@ -49,6 +68,23 @@ loginBtn.addEventListener('click',function(){
   const newPage=document.getElementById('new');
   newPage.style.display='block';
 });
+// for deposit
+  const depositButton=document.getElementById('depositBtn');
+  depositButton.addEventListener('click',function(){
+  const depositAmount=document.getElementById('depositAmount').value;
+  const depositNumber=parseFloat(depositAmount);
+  getSpanText('depositMoney',depositNumber);
+  getSpanText('balanceMoney',depositNumber);
+  document.getElementById('depositAmount').value="";
+function getSpanText(id,depositNumber){
+  const current=document.getElementById(id).innerText;
+  const currentNumber=parseFloat(current);
+  const currentTotalNumber=depositNumber+currentNumber;
+  document.getElementById(id).innerText=currentTotalNumber;
+
+}
+
+})
   </script>
 </body>
 </html>
